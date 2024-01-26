@@ -1,0 +1,8 @@
+<% if loan.status == 'requested' %>
+  <div>
+    <% if can? :update, loan %>
+      <%= link_to 'edit interest', edit_interest_loan_path(loan), class: 'btn btn-outline-primary' %>
+    <% end %>
+    <%= link_to 'approve', approve_loan_path(loan.id), data: { turbo: false }, class: 'btn btn-outline-success' %>  <%= link_to 'reject', reject_loan_path(loan.id), data: { turbo: false }, class: 'btn btn-outline-danger' %>
+  </div>
+<% end %>

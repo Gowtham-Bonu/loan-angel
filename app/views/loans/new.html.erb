@@ -1,0 +1,20 @@
+<%= turbo_frame_tag 'new_form' do %>
+  <%= form_with model: @loan do |f| %>
+    <% if !@loan.errors.empty? %>
+      <ul class="alert alert-danger">
+        <% @loan.errors.full_messages.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul
+    <% end %>
+    </ul>
+    <div class="row">
+      <div class="col-3 mb-3"><%= f.text_field :name, type: "text", class: "form-control", placeholder: "name" %></div>
+      <div class="col-3 mb-3"><%= f.number_field :amount, type: "text", class: "form-control", placeholder: "amount"  %></div>
+      <div class="col-3 mb-3"><%= f.text_field :reason, type: "text", class: "form-control", placeholder: "reason" %></div>
+      <div class="col-1 mb-3"><%= f.submit "request", class: 'btn btn-success mb-2' %></div>
+      <div class="col-1 mb-3"><%= link_to 'cancel', root_path, class: 'btn btn-danger mb-2' %></div>
+    </div>
+  <% end %>
+  </div>
+<% end %>

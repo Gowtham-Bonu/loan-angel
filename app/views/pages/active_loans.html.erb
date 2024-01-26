@@ -1,0 +1,29 @@
+<ul class="nav nav-pills mb-3">
+  <li class="nav-item">
+    <a class="nav-link" href="/">Requested Loans</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href=<%= confirmation_requests_path %>>Confirmation Requests</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="#">Active Loans</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href=<%= rejected_loans_path %>>Rejected Loans</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href=<%= closed_loans_path %>>Closed Loans</a>
+  </li>
+</ul>
+<% @loans.each do |loan| %>
+  <div class="card">
+    <h5 class="card-header card-title text-uppercase fw-bold"><%= loan.name %></h5>
+    <div class="card-body">
+      <p class="card-text"><span class="fw-bold">Amount received</span>: <%= loan.amount %></p>
+      <p class="card-text"><span class="fw-bold">Interest</span>: <%= loan.interest %>%</p>
+      <p class="card-text"><span class="fw-bold">Reason</span>: <%= loan.reason %></p>
+      <p class="card-text"><span class="fw-bold">Total interest amount</span>: <%= loan.interest_amount * loan.interest_count %>, on total of <%= loan.interest_count %> interest cycles. </p>
+      <%= button_to "pay #{loan.payable_amount}", repay_loan_loan_path(loan), class: 'btn btn-outline-primary' %>
+    </div>
+  </div>
+<% end %>

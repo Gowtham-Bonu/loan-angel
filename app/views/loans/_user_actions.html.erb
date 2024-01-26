@@ -1,0 +1,5 @@
+<% if loan.status == 'approved' %>
+  <div>
+    <%= link_to 'confirm', open_loan_path(loan.id), data: { turbo: false }, class: 'btn btn-success' %> <%= link_to 'reject', reject_loan_user_loan_path(loan.id), data: { turbo: false }, class: 'btn btn-danger' %>
+  </div>
+<% end %>

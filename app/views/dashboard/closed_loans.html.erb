@@ -1,0 +1,13 @@
+
+<ul class="nav nav-pills mb-3">
+  <li class="nav-item">
+    <a class="nav-link" href=<%= admin_root_path %>>Loan Requests</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href=<%= admin_active_loans_path %>>Active Loans</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link active" href="#">Closed Loans</a>
+  </li>
+</ul>
+<%= render partial: 'loans/admin_loan', collection: @loans, as: 'loan' %>

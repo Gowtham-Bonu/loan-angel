@@ -1,0 +1,5 @@
+<%= turbo_stream.prepend "loans" do %>
+  <%= render partial: "loan", locals: { admin_page: false, confirmation_page: false, loan: @loan } %>
+<% end %>
+<%= turbo_stream.update "new_form", ""  %>  
+<%= turbo_stream.update "msg", ""  %>  

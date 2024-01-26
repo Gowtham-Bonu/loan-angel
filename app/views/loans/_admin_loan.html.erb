@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-header">
+    <h5 class="card-title text-uppercase fw-bold"><%= loan.name %></h5>
+    <h6 class="card-subtitle mb-2 text-body-secondary">Status: <%= loan.status %></h6>
+  </div>
+  <div class="card-body">
+    <p class="card-text"><span class="fw-bold">Amount Requested</span>: <%= loan.amount %></p>
+    <p class="card-text"><span class="fw-bold">Interest on the loan</span>: <%= loan.interest %> percent</p>
+    <p class="card-text"><span class="fw-bold">Reason for the loan request</span>: <%= loan.reason %></p>
+    <p class="card-text"><span class="fw-bold">Loan user details</span>:</p>
+    <ul class="list-group list-group-flush">
+      <li class="card-text list-group-item text-end">name: <span class="fst-italic"><%= loan.user.first_name %> <%= loan.user.last_name %></span></li>
+      <li class="card-text list-group-item text-end">phone: <span class="fst-italic"><%= loan.user.phone %></li></span>
+      <li class="card-text list-group-item text-end">email: <span class="fst-italic"><%= loan.user.email %></li></span>
+    </ul>
+  </div>
+</div>

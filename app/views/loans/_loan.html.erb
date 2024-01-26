@@ -1,0 +1,19 @@
+<div class="card">
+  <%= turbo_frame_tag loan do %>
+    <div class="card-header">
+      <h5 class="card-title text-uppercase fw-bold"><%= loan.name %></h5>
+      <h6 class="card-subtitle mb-2 text-body-secondary">Status: <%= loan.status %></h6>
+    </div>
+    <div class="card-body">
+      <p class="card-text"><span class="fw-bold">Amount Requested</span>: <%= loan.amount %></p>
+      <p class="card-text"><span class="fw-bold">Interest on the loan</span>: <%= loan.interest %> percent</p>
+      <p class="card-text"><span class="fw-bold">Reason for the loan request</span>: <%= loan.reason %></p>
+      <% if admin_page %>
+        <%= render partial: 'loans/actions', locals:{ loan: loan } %>
+      <% end %>
+      <% if confirmation_page %>
+        <%= render partial: 'loans/user_actions', locals:{ loan: loan } %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

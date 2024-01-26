@@ -1,0 +1,12 @@
+<ul class="nav nav-pills mb-3">
+  <li class="nav-item">
+    <a class="nav-link active" href="#">Loan Requests</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href=<%= admin_active_loans_path %>>Active Loans</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href=<%= admin_closed_loans_path =%>>Closed Loans</a>
+  </li>
+</ul>
+<%= render partial: 'loans/loan', collection: @loans, locals: { admin_page: true, confirmation_page: false } %>

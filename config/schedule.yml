@@ -1,0 +1,3 @@
+calculate_interest:
+  cron: "* * * * *"
+  class: "InterestWorker"

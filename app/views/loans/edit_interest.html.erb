@@ -1,0 +1,22 @@
+<%= turbo_frame_tag @loan do %>
+  <div>
+    <h1><%= @loan.name %></h1>
+    <h3>Status: <%= @loan.status %></h3>
+    <p>Amount Requested: <%= @loan.amount %></p>
+    <%= form_with model: @loan, url: update_interest_loan_path(@loan.id), method: :post do |f| %>
+      <% if @loan.errors.any? %>
+        <ul class="alert alert-danger">
+          <% @loan.errors.full_messages.each do |error| %>
+            <li><%= error %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <div class="row">
+        <div class="col-3 mb-3"><%= f.number_field :interest, type: "text", class: "form-control" %></div>
+        <div class="col-3 mb-3"><%= f.submit 'update interest', class: 'btn btn-success' %></div>
+      </div>
+    <% end %>
+    <p>Reason for the loan request: <%= @loan.reason %></p>
+  </div>
+  <hr />
+<% end %>
