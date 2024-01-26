@@ -1,24 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Features:
 
-Things you may want to cover:
+* Handles multiple users and an admin
 
-* Ruby version
+* Users can make requests for loans and admin can accept or reject them
 
-* System dependencies
+* If approved user can confirm or rejectthe interest set by admin
 
-* Configuration
+* Once confirmed, amount requested will be transferred to the user's wallet.
 
-* Database creation
+* Interest set will be calculated on the principal amount for every five minutes
 
-* Database initialization
+* If user repays the loan, the loan will be closed
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* If user hasen't repayed and the total amount to pay is exceeding the user's wallet, then system automatically transfers the wallet's balance to admin's wallet
