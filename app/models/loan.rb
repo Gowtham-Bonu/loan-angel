@@ -6,8 +6,10 @@ class Loan < ApplicationRecord
   validates :reason, length: { in: 10..15 }
   validates :interest, numericality: { in: 5..10 }
 
-  belongs_to :user, optional: true
-  belongs_to :admin, class_name: 'User', optional: true
+  with_options optional: true do |assoc|
+    assoc.belongs_to :user, optional: true
+    assoc.belongs_to :admin, class_name: 'User', optional: true
+  end
 
   default_scope { order(id: :desc) }
 
