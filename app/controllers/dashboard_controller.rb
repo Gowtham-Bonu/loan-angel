@@ -1,17 +1,19 @@
 class DashboardController < ApplicationController
-  after_action :authorize_collection
-  before_action :set_current_page
+  before_action :set_current_page, except: :check_premium_wallet
 
   def index
     @loans = Loan.requested
+    authorize! :read, @loans
   end
 
   def active_loans
     @loans = Loan.open
+    authorize! :read, @loans
   end
 
   def closed_loans
     @loans = Loan.closed
+    authorize! :read, @loans
   end
 
   def check_premium_wallet
@@ -19,10 +21,6 @@ class DashboardController < ApplicationController
   end
 
   private
-
-  def authorize_collection
-    authorize! :read, @loans
-  end
 
   def set_current_page
     @current_page = params[:action]
