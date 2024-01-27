@@ -1,5 +1,6 @@
 class DashboardController < ApplicationController
   after_action :authorize_collection
+  before_action :set_current_page
 
   def index
     @loans = Loan.requested
@@ -21,5 +22,10 @@ class DashboardController < ApplicationController
 
   def authorize_collection
     authorize! :read, @loans
+  end
+
+  def set_current_page
+    @current_page = params[:action]
+    @current_controller = params[:controller]
   end
 end

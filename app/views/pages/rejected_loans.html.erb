@@ -1,21 +1,4 @@
-<ul class="nav nav-pills mb-3">
-  <li class="nav-item">
-    <a class="nav-link" href="/">Requested Loans</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href=<%= confirmation_requests_path =%>>Confirmation Requests</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href=<%= active_loans_path %>>Active Loans</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link active" href="#">Rejected Loans</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href=<%= closed_loans_path %>>Closed Loans</a>
-  </li>
-</ul>
-
+<%= render partial: 'layouts/progress', locals: { current_page: @current_page, current_controller: @current_controller } %>
 <%= turbo_frame_tag "loans" do %>
   <%= render partial: 'loans/loan', collection: @loans, locals: { admin_page: false, confirmation_page: false } %>
 <% end %>

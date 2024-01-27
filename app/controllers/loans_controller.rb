@@ -1,6 +1,8 @@
 class LoansController < ApplicationController
   before_action :set_loan, except: [:new, :create, :show]
   before_action :set_wallets, only: [:open, :repay_loan]
+  before_action :check_for_loan_request, only: [:approve, :reject]
+  before_action :check_for_loan_approval, only: [:open, :reject_loan_user]
 
   def new
     @loan = Loan.new
@@ -22,7 +24,7 @@ class LoansController < ApplicationController
   def show; end
 
   def approve
-    if @loan.requested? and @loan.trigger_approve_loan
+    if check_for_loan_request and @loan.trigger_approve_loan
       @loan.admin = admin_user
     else
       flash[:alert] = "loan is not approved!"
@@ -31,7 +33,7 @@ class LoansController < ApplicationController
   end
 
   def reject
-    if @loan.requested? and @loan.trigger_reject_loan
+    if check_for_loan_request and @loan.trigger_reject_loan
       @loan.admin = admin_user
     else
       flash[:alert] = "loan is not rejected!"
@@ -40,14 +42,12 @@ class LoansController < ApplicationController
   end
 
   def open
-    if @loan.approved? and @loan.trigger_confirm_loan
+    if check_for_loan_approval and @loan.trigger_confirm_loan
       @loan.admin = admin_user
       @premium_wallet.update(balance: @premium_wallet.balance - @loan.amount)
       @wallet.update(balance: @wallet.balance + @loan.amount)
       @loan.interest_amount = (@loan.interest * @loan.amount)/100
-      @loan.payable_amount = @loan.amount + @loan.interest_amount
-      @loan.interest_updated_at = Time.now
-      @loan.save
+      @loan.update(payable_amount: @loan.amount + @loan.interest_amount, interest_updated_at: Time.now)
       redirect_to active_loans_path
     else
       flash[:alert] = "loan is not confirmed!"
@@ -56,7 +56,7 @@ class LoansController < ApplicationController
   end
 
   def reject_loan_user
-    if @loan.approved?
+    if check_for_loan_approval
       @loan.admin = admin_user
       @loan.save
       @loan.trigger_reject_loan_user
@@ -102,5 +102,13 @@ class LoansController < ApplicationController
     def set_wallets
       @premium_wallet = admin_user.premium_wallet
       @wallet = current_user.wallet
+    end
+
+    def check_for_loan_request
+      @loan.requested?
+    end
+
+    def check_for_loan_approval
+      @loan.approved?
     end
 end

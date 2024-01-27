@@ -1,17 +1,17 @@
 class Loan < ApplicationRecord
   include AASM
 
+  default_scope { order(id: :desc) }
+
   validates :amount, :reason, :name, presence: true
   validates :amount, numericality: { in: 100..9000 }
   validates :reason, length: { in: 10..15 }
   validates :interest, numericality: { in: 5..10 }
 
   with_options optional: true do |assoc|
-    assoc.belongs_to :user, optional: true
-    assoc.belongs_to :admin, class_name: 'User', optional: true
+    assoc.belongs_to :user
+    assoc.belongs_to :admin, class_name: 'User'
   end
-
-  default_scope { order(id: :desc) }
 
   aasm column: 'status' do
     state :requested, initial: true

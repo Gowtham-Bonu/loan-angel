@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_action :set_requested_loans, except: :check_wallet
+  before_action :set_state, except: :check_wallet
 
   def index
     @loans = @requested_loans.requested
@@ -27,7 +27,9 @@ class PagesController < ApplicationController
 
   private
 
-  def set_requested_loans
+  def set_state
     @requested_loans = current_user.requested_loans
+    @current_page = params[:action]
+    @current_controller = params[:controller]
   end
 end

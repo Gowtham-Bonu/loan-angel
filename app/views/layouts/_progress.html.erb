@@ -1,0 +1,25 @@
+<ul class="nav nav-pills mb-3">
+  <li class="nav-item">
+    <% if current_controller == 'dashboard' %>
+      <%= link_to 'loans requested', admin_root_path, class: "nav-link #{ current_page == 'index' ? 'active' : ''}" %>
+    <% else %>
+      <%= link_to 'requested loans', root_path, class: "nav-link #{ current_page == 'index' ? 'active' : ''}" %>
+    <% end %>
+  </li>
+  <% if current_controller == 'pages' %>
+    <li class="nav-item">
+      <%= link_to 'confirmation requests', confirmation_requests_path, class: "nav-link #{ current_page == 'confirmation_requests' ? 'active' : ''}" %>
+    </li>
+  <% end %>
+  <li class="nav-item">
+    <%= link_to 'open loans', current_controller == 'dashboard' ? admin_active_loans_path : active_loans_path, class: "nav-link #{ current_page == 'active_loans' ? 'active' : ''}" %>
+  </li>
+  <% if current_controller == 'pages' %>
+    <li class="nav-item">
+      <%= link_to 'rejected loans', rejected_loans_path, class: "nav-link #{ current_page == 'rejected_loans' ? 'active' : ''}" %>
+    </li>
+  <% end %>
+  <li class="nav-item">
+    <%= link_to 'closed loans', current_controller == 'dashboard' ? admin_closed_loans_path : closed_loans_path, class: "nav-link #{ current_page == 'closed_loans' ? 'active' : ''}" %>
+  </li>
+</ul>

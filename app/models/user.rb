@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, :phone, presence: true
   validates :phone, length: { is: 10 }, numericality: true, uniqueness: true
+  validate  :check_role, if: -> { role == true }
 
   with_options dependent: :destroy do |assoc|
     assoc.has_one :wallet, as: :accountable
@@ -14,7 +15,6 @@ class User < ApplicationRecord
     assoc.has_many :requested_loans, class_name: 'Loan', foreign_key: 'user_id'
   end
 
-  after_validation :check_role
   before_create ->(user) { user.role ? build_wallet(balance: 1000000) : build_wallet(balance: 10000) }
 
   def admin?
@@ -24,8 +24,8 @@ class User < ApplicationRecord
   private
 
   def check_role
-    if role and !User.where(role: true).empty?
-      errors.add :base, 'only one admin can exist!'
+    if !User.where(role: true).empty?
+      errors.add :role, 'only one admin can exist!!!hwqwqh'
     end
   end
 end
