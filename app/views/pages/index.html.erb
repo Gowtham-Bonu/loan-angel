@@ -1,8 +1,6 @@
 <%= render partial: 'layouts/progress', locals: { current_page: @current_page, current_controller: @current_controller } %>
 <%= link_to "Create loan", new_loan_path, class: "btn btn-outline-primary mb-3" , data: { turbo_frame: "new_form" } %>
-
 <%= turbo_frame_tag "new_form" %>
-
 <%= turbo_frame_tag "loans" do %>
   <%= render partial: 'loans/loan', collection: @loans, locals: { admin_page: false, confirmation_page: false } %>
 <% end %>

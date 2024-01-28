@@ -21,8 +21,6 @@ class LoansController < ApplicationController
     end
   end
 
-  def show; end
-
   def approve
     if check_for_loan_request and @loan.trigger_approve_loan
       @loan.admin = admin_user

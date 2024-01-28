@@ -13,7 +13,6 @@ class InterestWorker
           loan.interest_count = loan.interest_count + 1
           loan.payable_amount = (loan.interest_amount * loan.interest_count) + loan.amount
           loan.interest_updated_at = Time.now
-          # p loan.interest_updated_at
           loan.save
         end
       end

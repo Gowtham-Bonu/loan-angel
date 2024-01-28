@@ -16,9 +16,8 @@ Rails.application.routes.draw do
   get '/closed_loans', to: 'pages#closed_loans', as: :closed_loans
   get '/balance', to: 'pages#check_wallet', as: :wallet_balance
 
-
   devise_for :users
-  resources :loans, only: [:create, :show, :new] do
+  resources :loans, only: [:create, :new] do
     member do
       get 'approve'
       get 'reject'
