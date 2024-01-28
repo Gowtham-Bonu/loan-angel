@@ -1,5 +1,5 @@
 class LoansController < ApplicationController
-  before_action :set_loan, except: [:new, :create, :show]
+  before_action :set_loan, except: [:new, :create]
   before_action :set_wallets, only: [:open, :repay_loan]
   before_action :check_for_loan_request, only: [:approve, :reject]
   before_action :check_for_loan_approval, only: [:open, :reject_loan_user]
