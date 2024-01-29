@@ -24,7 +24,7 @@ class User < ApplicationRecord
   private
 
   def check_role
-    if !User.where(role: true).empty?
+    if User.find_by(role: true)
       errors.add :role, 'only one admin can exist!!!hwqwqh'
     end
   end
