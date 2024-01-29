@@ -1,4 +1,2 @@
 <%= render partial: 'layouts/progress', locals: { current_page: @current_page, current_controller: @current_controller } %>
-<%= turbo_frame_tag "loans" do %>
-  <%= render partial: 'loans/loan', collection: @loans, locals: { admin_page: false, confirmation_page: false } %>
-<% end %>
+<%= render partial: 'loans/loan', collection: @loans, locals: { admin_page: false, confirmation_page: false } %>
