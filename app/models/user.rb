@@ -18,7 +18,7 @@ class User < ApplicationRecord
   before_create ->(user) { user.role ? build_wallet(balance: 1000000) : build_wallet(balance: 10000) }
 
   def admin?
-    role == true ? true : false
+    role == true
   end
 
   private
