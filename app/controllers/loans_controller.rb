@@ -22,8 +22,8 @@ class LoansController < ApplicationController
   end
 
   def approve
-    if check_for_loan_request and @loan.trigger_approve_loan
-      @loan.admin = admin_user
+    if check_for_loan_request
+      @loan.trigger_approve_loan
     else
       flash[:alert] = "loan is not approved!"
     end
@@ -31,8 +31,8 @@ class LoansController < ApplicationController
   end
 
   def reject
-    if check_for_loan_request and @loan.trigger_reject_loan
-      @loan.admin = admin_user
+    if check_for_loan_request
+      @loan.trigger_reject_loan
     else
       flash[:alert] = "loan is not rejected!"
     end
@@ -55,8 +55,6 @@ class LoansController < ApplicationController
 
   def reject_loan_user
     if check_for_loan_approval
-      @loan.admin = admin_user
-      @loan.save
       @loan.trigger_reject_loan_user
     else
       flash[:alert] = "loan is not rejected!"
